@@ -7,28 +7,56 @@ float calculerTempsRecharge(float capacite, float puissance);
 void modifierBorne(float dist[], int taille);
 
 int main() {
+    const int taille = 5;
+    float puiss[taille] = {50, 100, 22, 150, 75};
+    float dist[taille] = {12, 5, 20, 8, 15};
 
-    float capacite;
-    int indice;
+    int choix;
 
-    float puissance[5] = {50.0, 22.0, 11.0, 150.0, 7.4};
-    float distances[5] = {12.5, 35.0, 8.0, 60.0, 2.3};
+    do
+    {
+        cout << "1 Afficher toutes les bornes" << "!\n";
+        cout << "2 Afficher la borne la plus proche" <<"!\n";
+        cout << "3 Estimer un temps de recharge" <<"\n";
+        cout << "4 Modifier une borne" <<"!\n";
+        cout << "5 Quitter" <<"!\n";
 
-    afficherBornes(puissance, distances, 5);
+        cin >> choix;
 
-    int plusProche = indiceBorneLaPlusProche(distances, 5);
-    cout << "La borne la plus proche est la borne : " << plusProche << "!\n";
-    modifierBorne(distances, 5);
-    cout << "Veuillez indiquer l'indice de la station que vous souhaitez utiliser : ";
-    cin >> indice;
-    cout << "Veuillez indiquer la capacité que vous souhaitez recharger (en kWh) : ";
-    cin >> capacite;
-    float temps = calculerTempsRecharge(capacite, puissance[indice-1]);
-    cout << "Temps de recharge estime : " << temps << " heures\n";
+        if(choix == 1)
+        {
+            afficherBornes(puiss, dist, taille);
+        }
 
-    afficherBornes(puissance, distances, 5);
-   
-    return 0; 
+        if(choix == 2)
+        {
+            int indice;
+            indice = indiceBorneLaPlusProche(dist, taille);
+            cout << indice <<"!\n";
+        }
+
+        if(choix == 3)
+        {
+            int indice;
+            float capacite;
+            float temps;
+
+            cin >> indice;
+            cin >> capacite;
+
+            temps = calculerTempsRecharge(capacite, puiss[indice-1]);
+
+            cout << temps <<"!\n";
+        }
+
+        if(choix == 4)
+        {
+            modifierBorne(dist, taille);
+        }
+
+    } while(choix != 5);
+
+    return 0;
 }
 
 void afficherBornes(const float puiss[], const float dist[], int taille)
@@ -64,7 +92,7 @@ void modifierBorne(float dist[], int taille)
     cout << "Voulez-vous modifier la distance d'une borne ? (0/1) : ";
     cin >> choix;
 
-    if(choix == 0)
+    if(choix == 1)
     {
         cout << "Numero de la borne : ";
         cin >> indiceBorne;
