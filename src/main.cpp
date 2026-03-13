@@ -27,8 +27,8 @@ void afficherBornes(const float puiss[], const float dist[], int taille)
 int indiceBorneLaPlusProche(const float dist[], int taille)
 {
     int indice = 0;
-    for(int i = 1; i < taille; i++)
+    for(int i = 0; i < taille; i++)
         if(dist[i] < dist[indice])
             indice = i;
-    return indice;
+    return indice+1;
 }
